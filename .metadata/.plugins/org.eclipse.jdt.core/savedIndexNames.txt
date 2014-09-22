@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+C:\Users\Aubrey\Documents\workspace\Capstone\.metadata\.plugins\org.eclipse.jdt.core
+2176977493.index
