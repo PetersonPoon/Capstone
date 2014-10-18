@@ -1,16 +1,36 @@
 package com.example.cleanspace;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+/**
+ * This activity will display the general details of our one sensor Details
+ * include: Name, dust condition (good/bad)
+ * 
+ * FUTURE: Display details on more than one sensor
+ * 
+ * @author echiang
+ * 
+ */
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	}
+
+	// Click details button to open new activity
+	public void openDetailsActivity(View view) {
+		Intent detailsIntent = new Intent(MainActivity.this,
+				DetailsActivity.class);
+		// For future when we need to pass data to DetailsActivity:
+		// detailsIntent.putExtra(name, value);
+		MainActivity.this.startActivity(detailsIntent);
 	}
 
 	@Override
