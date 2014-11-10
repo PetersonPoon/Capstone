@@ -59,5 +59,13 @@
         android:layout_below="@+id/sensor_title"
         android:layout_marginTop="90dp"
         android:text="@string/status" />
+    
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sample_area"
+        android:onClick="saveEditActivity"
+        android:text="@string/accept_Changes" />
 
 </RelativeLayout>

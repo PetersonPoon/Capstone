@@ -16,5 +16,5 @@
     <string name="edit_fields">Click to edit fields: </string>
     <string name="sensor_name">Name of Sensor </string>
     <string name="area_size">Size of area to monitor </string>
-
+	<string name="accept_Changes">Accept</string>
 </resources>
