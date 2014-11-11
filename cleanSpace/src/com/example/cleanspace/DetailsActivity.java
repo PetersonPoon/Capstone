@@ -14,13 +14,12 @@ public class DetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 	}
-	
-	public void openEditActivity(View view){
+
+	public void openEditActivity(View view) {
 		Intent editIntent = new Intent(DetailsActivity.this, EditActivity.class);
 		DetailsActivity.this.startActivity(editIntent);
 	}
 
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
