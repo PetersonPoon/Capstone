@@ -32,6 +32,14 @@
             android:label="@string/title_activity_edit"
             android:parentActivityName="com.example.cleanspace.DetailsActivity" >
         </activity>
+                
+        
     </application>
+    
+     <uses-permission 
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18">        
+    </uses-permission>	
+   
 
 </manifest>

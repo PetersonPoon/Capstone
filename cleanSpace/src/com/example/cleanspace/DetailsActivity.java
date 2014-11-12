@@ -1,11 +1,14 @@
 package com.example.cleanspace;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.net.URL;
@@ -13,10 +16,13 @@ import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.net.MalformedURLException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.BufferedReader;
 
 import static com.example.cleanspace.EditActivity.EDITEDTITLE; //@string/first_sensor_details"
@@ -28,6 +34,8 @@ public class DetailsActivity extends Activity {
 	public String newString = "test";
 	private Boolean mStop = false;
 	public int value;
+	String newSensorTitle = "Furnace Filter";
+	static String testName = "qwerty";
 	
 //Initialize the details activity page and create threa for Arduino communication
 	@Override
@@ -35,21 +43,71 @@ public class DetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 		
-		String newSensorTitle = "Furnace Filter Sensor";
-		String newSampleArea = "123";
+		
+		String temp = "";
+		String newSampleArea = "";
+		String FileName = "HAM_test_storage";
+		
+		if(isExternalStorageReadable()){
+			FileInputStream fis;
+			
+			try {
+				fis = openFileInput(FileName);
+				int t = 0;
+			//	fis.
+				while((t = fis.read()) != -1){
+					temp = temp + Character.toString((char)t);
+				}
+				
+				
+				fis.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else{
+			 newSensorTitle = "Furnace Sensor";
+			 newSampleArea = "123";
+		}
 		
 		Intent intent = getIntent();
 		if(null != intent){
 			newSensorTitle = intent.getStringExtra(EDITEDTITLE);
 			
 			newSampleArea = intent.getStringExtra(EDITEDSAMPLEAREA);
+			
+			
+			FileOutputStream fos;
+			try {
+				fos = openFileOutput(FileName, Context.MODE_PRIVATE);
+				if(newSensorTitle != null){
+					fos.write(newSensorTitle.getBytes());
+				}
+				fos.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
-		TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
-		sensorTitle.setText(newSensorTitle);
+		if(temp != ""){
+			TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
+			sensorTitle.setText(temp);
+			newSensorTitle = temp;
+		}
+		else if (newSensorTitle != null){
+			TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
+			sensorTitle.setText(newSensorTitle);
+		}
 		
+			
 		TextView sampleArea = (TextView) findViewById(R.id.sample_area);
-		sampleArea.setText(newSampleArea);
+		sampleArea.setText(testName);
 	}
 	
 	@Override
@@ -129,14 +187,20 @@ public class DetailsActivity extends Activity {
 	//link to Edit Activity page
 	public void openEditActivity(View view){
 			Intent editIntent = new Intent(DetailsActivity.this, EditActivity.class);
+			
+			
+			TextView newSensorTitle = (TextView) findViewById(R.id.sensor_title);
+			String newTitle = newSensorTitle.getText().toString();
+			editIntent.putExtra(EDITEDTITLE, newTitle);
+			
 			DetailsActivity.this.startActivity(editIntent);
 	}
 	
-	public void saveEditActivity(View view, String newText){
+	/*public void saveEditActivity(View view, String newText){
 		setContentView(R.layout.activity_details);
 		TextView myText = (TextView) findViewById(R.id.sensor_title);
 		myText.setText(String.valueOf(newText));
-	}
+	}*/
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,6 +219,23 @@ public class DetailsActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public boolean isExternalStorageWriteable() {
+		String state = Environment.getExternalStorageState();
+		if(Environment.MEDIA_MOUNTED.equals(state)){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isExternalStorageReadable(){
+		String state = Environment.getExternalStorageState();
+		if(Environment.MEDIA_MOUNTED.equals(state) ||
+				Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
+			return true;
+		}
+		return false;
 	}
 	
 }

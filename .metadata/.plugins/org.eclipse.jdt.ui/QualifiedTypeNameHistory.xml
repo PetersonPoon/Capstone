@@ -8,4 +8,7 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.example.cleanspace.R.id"/>
+<fullyQualifiedTypeName name="com.example.cleanspace.EditActivity"/>
+<fullyQualifiedTypeName name="android.os.Environment"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
 </qualifiedTypeNameHistroy>

@@ -1,6 +1,13 @@
 package com.example.cleanspace;
 
+import static com.example.cleanspace.EditActivity.EDITEDSAMPLEAREA;
+import static com.example.cleanspace.EditActivity.EDITEDTITLE;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +26,18 @@ public class EditActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit);
 		
+		String oldSensorTitle = "";
+		
+		Intent intent = getIntent();
+		if(null != intent){
+			oldSensorTitle = intent.getStringExtra(EDITEDTITLE);
+			
+		//	newSampleArea = intent.getStringExtra(EDITEDSAMPLEAREA);
+			
+			
+			EditText LoadSensorTitle = (EditText) findViewById(R.id.sensor_title);
+			LoadSensorTitle.setText(oldSensorTitle);
+		}
 
 	}
 
@@ -56,7 +75,7 @@ public class EditActivity extends Activity {
 		// detailsIntent.putExtra(name, value);
 		detailsIntent.putExtra(EDITEDTITLE, newTitle);
 		detailsIntent.putExtra(EDITEDSAMPLEAREA, newSampleArea);
-		
+		DetailsActivity.testName = newSampleArea;
 		EditActivity.this.startActivity(detailsIntent);
 	}
 	
