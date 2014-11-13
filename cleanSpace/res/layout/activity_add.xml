@@ -28,17 +28,15 @@
         android:hint="@string/area_size"
         android:inputType="number" />
 
-    <!-- USE THIS NEXT PART TO START A FILE IF NEEDED -->
-    <!-- android:onClick="saveNewSensor" -->
-
     <Button
         android:id="@+id/saveButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="200dp"
         android:background="@drawable/circle"
+        android:onClick="saveNewSensor"
         android:text="@string/save"
         android:textColor="#16b116"
         android:textSize="12sp" />
