@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class DetailsActivity extends Activity {
 
@@ -13,11 +12,6 @@ public class DetailsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
-	}
-
-	public void openEditActivity(View view) {
-		Intent editIntent = new Intent(DetailsActivity.this, EditActivity.class);
-		DetailsActivity.this.startActivity(editIntent);
 	}
 
 	@Override
@@ -35,6 +29,13 @@ public class DetailsActivity extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		} else if (id == R.id.refresh_button) {
+			// TODO: Code here to get new data
+			return true;
+		} else if (id == R.id.edit_button) {
+			Intent editIntent = new Intent(DetailsActivity.this,
+					EditActivity.class);
+			DetailsActivity.this.startActivity(editIntent);
 		}
 		return super.onOptionsItemSelected(item);
 	}

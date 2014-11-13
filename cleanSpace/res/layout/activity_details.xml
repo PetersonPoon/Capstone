@@ -5,23 +5,13 @@
     android:background="@drawable/background"
     tools:context="com.example.cleanspace.DetailsActivity" >
 
-    <Button
-        android:id="@+id/editButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/sensor_title"
-        android:background="@drawable/ic_menu_edit"
-        android:onClick="openEditActivity" />
-
     <TextView
         android:id="@+id/details_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/sensor_title"
         android:layout_below="@+id/status"
-        android:layout_marginTop="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="85dp"
         android:text="@string/details"
         android:textColor="#FFFFFF"
         android:textSize="24sp" />
@@ -30,10 +20,22 @@
         android:id="@+id/particle_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/details_title"
         android:layout_below="@+id/details_title"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="45dp"
         android:text="@string/particle_count"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/current_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/details_title"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/particle_value"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
@@ -41,10 +43,22 @@
         android:id="@+id/sample_area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/particle_count"
         android:layout_below="@+id/particle_count"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:text="@string/sample_area"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/current_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/particle_count"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/area_value"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
@@ -53,9 +67,8 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editButton"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="60dp"
         android:text="@string/first_sensor_details"
         android:textColor="#16b116"
         android:textSize="33sp"
@@ -67,9 +80,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/sensor_title"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
         android:text="@string/status"
+        android:textColor="#16b116"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/currentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/status"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/current_status"
         android:textColor="#16b116"
         android:textSize="18sp" />
 
@@ -77,9 +102,9 @@
         android:id="@+id/changedButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@+id/editButton"
+        android:layout_below="@+id/sample_area"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/details_title"
         android:background="@drawable/circle"
         android:text="@string/changed"
         android:textColor="#16b116"
@@ -89,9 +114,9 @@
         android:id="@+id/ignoredButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/particle_count"
-        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/current_area"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@+id/current_count"
         android:background="@drawable/circle"
         android:text="@string/ignored"
         android:textColor="#16b116"
