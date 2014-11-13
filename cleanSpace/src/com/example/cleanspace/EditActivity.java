@@ -27,16 +27,20 @@ public class EditActivity extends Activity {
 		setContentView(R.layout.activity_edit);
 		
 		String oldSensorTitle = "";
+		String oldSampleArea = "";
 		
 		Intent intent = getIntent();
 		if(null != intent){
 			oldSensorTitle = intent.getStringExtra(EDITEDTITLE);
 			
-		//	newSampleArea = intent.getStringExtra(EDITEDSAMPLEAREA);
+			oldSampleArea = intent.getStringExtra(EDITEDSAMPLEAREA);
 			
 			
 			EditText LoadSensorTitle = (EditText) findViewById(R.id.sensor_title);
 			LoadSensorTitle.setText(oldSensorTitle);
+			
+			EditText LoadSampleArea = (EditText) findViewById(R.id.sample_area);
+			LoadSampleArea.setText(oldSampleArea);
 		}
 
 	}

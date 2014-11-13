@@ -1,11 +1,16 @@
 package com.example.cleanspace;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * This activity will display the general details of our one sensor Details
@@ -22,6 +27,45 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+		String FileName = "HAM_test_storage";
+		int titleStop = 0;
+		String SensorTitle = "";
+		if(isExternalStorageReadable()){
+			FileInputStream fis;
+			
+			try {
+				fis = openFileInput(FileName);
+				int t = 0;
+			//	fis.
+				while((t = fis.read()) != -1 && titleStop != 1){
+										
+					
+						if (t == 10){
+							titleStop = 1;
+						} else{
+							SensorTitle = SensorTitle + Character.toString((char)t);
+						}
+							
+					
+				}
+				
+				fis.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else{
+			 SensorTitle = "Furnace Sensor";
+			
+		}
+		
+		Button SensorButton = (Button) findViewById(R.id.button1);
+		SensorButton.setText(SensorTitle);
+		
 	}
 
 	// Click details button to open new activity
@@ -50,5 +94,14 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public boolean isExternalStorageReadable(){
+		String state = Environment.getExternalStorageState();
+		if(Environment.MEDIA_MOUNTED.equals(state) ||
+				Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
+			return true;
+		}
+		return false;
 	}
 }

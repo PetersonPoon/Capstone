@@ -46,6 +46,8 @@ public class DetailsActivity extends Activity {
 		
 		String temp = "";
 		String newSampleArea = "";
+		String tempSampleArea = "";
+		int newLinePassed = 0;
 		String FileName = "HAM_test_storage";
 		
 		if(isExternalStorageReadable()){
@@ -56,10 +58,19 @@ public class DetailsActivity extends Activity {
 				int t = 0;
 			//	fis.
 				while((t = fis.read()) != -1){
-					temp = temp + Character.toString((char)t);
+					
+					if(t != 10 && newLinePassed == 0){
+						temp = temp + Character.toString((char)t);
+						
+					}else if (t == 10){
+						newLinePassed = 1;
+					}else if (newLinePassed ==1){
+						
+						tempSampleArea = tempSampleArea + Character.toString((char)t);
+						
+					}
 				}
-				
-				
+				newLinePassed = 0;
 				fis.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -81,11 +92,22 @@ public class DetailsActivity extends Activity {
 			
 			FileOutputStream fos;
 			try {
-				fos = openFileOutput(FileName, Context.MODE_PRIVATE);
+				
 				if(newSensorTitle != null){
+					fos = openFileOutput(FileName, Context.MODE_PRIVATE);
 					fos.write(newSensorTitle.getBytes());
+					
+					fos.close();
 				}
-				fos.close();
+				
+				if(newSampleArea != null){
+					fos = openFileOutput(FileName, Context.MODE_APPEND);
+					fos.write('\n');
+					fos.write(newSampleArea.getBytes());
+					
+					fos.close();
+				}
+				
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -95,19 +117,25 @@ public class DetailsActivity extends Activity {
 			
 		}
 		
-		if(temp != ""){
-			TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
-			sensorTitle.setText(temp);
-			newSensorTitle = temp;
-		}
-		else if (newSensorTitle != null){
+		
+		if (newSensorTitle != null){
 			TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
 			sensorTitle.setText(newSensorTitle);
+		}else if(temp != ""){
+			TextView sensorTitle = (TextView) findViewById(R.id.sensor_title);
+			sensorTitle.setText(temp);
+			//newSensorTitle = temp;
 		}
 		
-			
-		TextView sampleArea = (TextView) findViewById(R.id.sample_area);
-		sampleArea.setText(testName);
+		
+		if (newSampleArea != null){
+			TextView sampleArea = (TextView) findViewById(R.id.sample_area);
+			sampleArea.setText(newSampleArea);
+		}
+		else if(tempSampleArea != null){	
+			TextView sampleArea = (TextView) findViewById(R.id.sample_area);
+			sampleArea.setText(tempSampleArea);
+		}
 	}
 	
 	@Override
@@ -191,7 +219,12 @@ public class DetailsActivity extends Activity {
 			
 			TextView newSensorTitle = (TextView) findViewById(R.id.sensor_title);
 			String newTitle = newSensorTitle.getText().toString();
+			
+			TextView newSampleArea = (TextView) findViewById(R.id.sample_area);
+			String newArea = newSampleArea.getText().toString();
+			
 			editIntent.putExtra(EDITEDTITLE, newTitle);
+			editIntent.putExtra(EDITEDSAMPLEAREA, newArea);
 			
 			DetailsActivity.this.startActivity(editIntent);
 	}
