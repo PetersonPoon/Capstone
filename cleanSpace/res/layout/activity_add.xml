@@ -40,5 +40,4 @@
         android:text="@string/save"
         android:textColor="#16b116"
         android:textSize="12sp" />
-
-</RelativeLayout>
+</RelativeLayout>
