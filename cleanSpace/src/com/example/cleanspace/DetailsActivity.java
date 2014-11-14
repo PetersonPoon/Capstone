@@ -327,7 +327,7 @@ public class DetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 	}
-	
+
 	public void openEditActivity(View view){
 		Intent editIntent = new Intent(DetailsActivity.this, EditActivity.class);
 		DetailsActivity.this.startActivity(editIntent);
@@ -364,7 +364,7 @@ public class DetailsActivity extends Activity {
 		
 	}
 
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -380,6 +380,13 @@ public class DetailsActivity extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		} else if (id == R.id.refresh_button) {
+			// TODO: Code here to get new data
+			return true;
+		} else if (id == R.id.edit_button) {
+			Intent editIntent = new Intent(DetailsActivity.this,
+					EditActivity.class);
+			DetailsActivity.this.startActivity(editIntent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
